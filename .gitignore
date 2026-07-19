@@ -1,0 +1,23 @@
+# =============================================================================
+# PDF Lks Text Editor - Fichiers ignorés par Git
+# Créé par Leksa667 (https://github.com/Leksa667)
+# =============================================================================
+
+# Build artifacts
+/target
+
+# IDE files
+.vs/
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temp files
+*.tmp
+*.temp

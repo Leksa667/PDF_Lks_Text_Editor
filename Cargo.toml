@@ -1,0 +1,29 @@
+# =============================================================================
+# PDF Lks Text Editor - Configuration du projet Rust
+# Créé par Leksa667 (https://github.com/Leksa667)
+#
+# Ce logiciel est en libre service. Vous pouvez l'utiliser, le modifier
+# et le distribuer librement, à condition de créditer l'auteur original.
+# Aucune garantie n'est fournie.
+# =============================================================================
+
+[package]
+name = "pdf-editor"
+version = "0.2.0"
+edition = "2021"
+
+[dependencies]
+lopdf = "0.44"
+egui = "0.27"
+eframe = "0.27"
+image = { version = "0.24", default-features = false, features = ["png"] }
+serde_json = "1"
+anyhow = "1"
+rfd = "0.12"
+fontdue = "0.9"
+ureq = "2"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
