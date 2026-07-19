@@ -1,86 +1,86 @@
 # PDF Lks Text Editor
 
-Éditeur PDF libre avec OCR, reconnaissance de polices, édition de texte et dessin vectoriel.
+Free PDF editor with OCR, font matching, text editing and vector drawing.
 
-Développé en Rust avec [egui](https://github.com/emilk/egui).
+Built with Rust and [egui](https://github.com/emilk/egui).
 
-## Fonctionnalités
+## Features
 
-- **Édition de texte** dans les PDF existants — modifiez n'importe quel texte sans perdre la mise en page
-- **OCR** (Tesseract / Surya) — les documents scannés deviennent éditables
-- **Reconnaissance de polices** — identification automatique de la police d'un scan pour des corrections invisibles
-- **Rechercher & remplacer** — sur une page ou tout le document
-- **Dessin vectoriel** — lignes, rectangles, cercles, avec couleur et remplissage
-- **Annuler/Rétablir** (Ctrl+Z / Ctrl+Y)
-- **Polices libres intégrées** — téléchargement depuis l'application (Arimo, Tinos, Lato…)
-- **Export PDF** — sauvegarde dans un nouveau fichier
+- **Edit text** in existing PDFs — modify any text without breaking the layout
+- **OCR** (Tesseract / Surya) — scanned documents become editable
+- **Font matching** — automatically identifies the typeface of a scan for invisible corrections
+- **Find & replace** — single page or entire document
+- **Vector drawing** — lines, rectangles, circles with color and fill
+- **Undo/Redo** (Ctrl+Z / Ctrl+Y)
+- **Open-licensed fonts** — download from within the app (Arimo, Tinos, Lato…)
+- **PDF export** — save as a new file
 
 ## Installation
 
-### Prérequis
+### Prerequisites
 
-- [Rust](https://www.rust-lang.org/) (édition 2021)
-- Un moteur de rendu PDF (un des trois) :
-  - [Ghostscript](https://ghostscript.com/) — recommandé
+- [Rust](https://www.rust-lang.org/) (2021 edition)
+- A PDF renderer (one of these) :
+  - [Ghostscript](https://ghostscript.com/) — recommended
   - mutool
   - pdftoppm (poppler)
-- OCR (optionnel) :
-  - [Tesseract](https://github.com/UB-Mannheim/tesseract/wiki) — `fra+eng` recommandé
-  - ou [surya-ocr](https://github.com/VikParuchuri/surya) — `pip install surya-ocr`
+- OCR (optional) :
+  - [Tesseract](https://github.com/UB-Mannheim/tesseract/wiki) — `fra+eng` recommended
+  - or [surya-ocr](https://github.com/VikParuchuri/surya) — `pip install surya-ocr`
 
-### Compilation
+### Build
 
 ```bash
 cargo build --release
 ```
 
-### Utilisation
+### Usage
 
 ```bash
 cargo run --release
-# ou ouvrir un fichier directement :
-cargo run --release -- "chemin/vers/document.pdf"
+# or open a file directly :
+cargo run --release -- "path/to/document.pdf"
 ```
 
-Raccourcis :
-| Touche | Action |
-|--------|--------|
-| Ctrl+O | Ouvrir un PDF |
-| Ctrl+S | Enregistrer |
-| Ctrl+Z | Annuler |
-| Ctrl+Y | Rétablir |
-| Page suivante/précédente | Navigation |
-| Ctrl+0 | Ajuster le zoom |
+Shortcuts :
+| Key | Action |
+|-----|--------|
+| Ctrl+O | Open PDF |
+| Ctrl+S | Save |
+| Ctrl+Z | Undo |
+| Ctrl+Y | Redo |
+| Page Down/Up | Navigate |
+| Ctrl+0 | Fit zoom |
 
 ## Architecture
 
 ```
 src/
-├── main.rs          # Point d'entrée
-├── lib.rs           # Modules
-├── app.rs           # Interface utilisateur (egui)
-├── fontstore.rs     # Catalogue de polices libres
-├── worker.rs        # Threads : rendu, OCR, téléchargement
+├── main.rs          # Entry point
+├── lib.rs           # Module declarations
+├── app.rs           # GUI (egui)
+├── fontstore.rs     # Open font catalog
+├── worker.rs        # Background threads : render, OCR, download
 ├── ocr/
-│   ├── fontmatch.rs # Algorithme de correspondance de polices
-│   ├── tesseract.rs # Interface Tesseract OCR
-│   ├── surya.rs     # Interface Surya OCR
-│   └── preprocess.rs# Prétraitement d'image
+│   ├── fontmatch.rs # Font matching algorithm
+│   ├── tesseract.rs # Tesseract OCR interface
+│   ├── surya.rs     # Surya OCR interface
+│   └── preprocess.rs# Image preprocessing
 └── pdf/
-    ├── document.rs  # Structure du document PDF
-    ├── edit.rs      # Édition de texte in-place
-    ├── embed.rs     # Intégration de polices TrueType
-    ├── font.rs      # Encodage/décodage des polices PDF
-    ├── overlay.rs   # Peinture de texte sur scans
-    ├── render.rs    # Rendu PDF via Ghostscript/mutool
-    ├── shapes.rs    # Formes vectorielles
-    ├── subset.rs    # Sous-ensemble de polices TrueType
-    ├── text.rs      # Extraction de blocs de texte
-    └── ttf.rs       # Parseur TrueType
+    ├── document.rs  # PDF document structure
+    ├── edit.rs      # In-place text editing
+    ├── embed.rs     # TrueType font embedding
+    ├── font.rs      # PDF font encoding/decoding
+    ├── overlay.rs   # Text painting over scans
+    ├── render.rs    # PDF rendering via Ghostscript/mutool
+    ├── shapes.rs    # Vector shapes
+    ├── subset.rs    # TrueType font subsetting
+    ├── text.rs      # Text run extraction
+    └── ttf.rs       # TrueType parser
 ```
 
-## Licence
+## License
 
-Ce logiciel est en libre service. Vous pouvez l'utiliser, le modifier et le distribuer librement, à condition de créditer l'auteur original. Aucune garantie n'est fournie.
+This software is free to use, modify and distribute, provided that the original author is credited. No warranty is provided.
 
-Créé par [Leksa667](https://github.com/Leksa667).
+Created by [Leksa667](https://github.com/Leksa667).
